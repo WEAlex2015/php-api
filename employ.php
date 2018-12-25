@@ -10,7 +10,7 @@ $dbname = "test";
 $default_action = 'list';
 $action = isset($_GET['action'])?$_GET['action']:$default_action;
 // 创建连接  
-$con =mysqli_connect($servername, $username, $password, $dbname); 
+$con =mysqli_connect($servername, $username, $password, $dbname);
 switch ($action) {
     case 'list':
         $sql = "SELECT * FROM test.employ e LEFT JOIN test.department d ON e.department_id = d.id";
