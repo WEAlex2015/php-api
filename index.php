@@ -6,9 +6,12 @@ $username = "root";
 $password = "root";  
 $dbname = "test";  
 
+
+$default_action = 'list';
+$a = isset($_GET['action'])?$_GET['action']:$default_action;
+
 // 创建连接  
 $con =mysqli_connect($servername, $username, $password, $dbname);  
-
 // 检测连接  
 if($_GET['id']){
     $id = $_GET['id'];
@@ -28,5 +31,7 @@ if($_GET['id']){
     }
     echo $str=json_encode($jarr, JSON_UNESCAPED_UNICODE);//将数组进行json编码
 }
-mysqli_close($con);
+if($con){
+    mysqli_close($con);
+}
 ?>
