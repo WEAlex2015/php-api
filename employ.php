@@ -29,13 +29,20 @@ switch ($action) {
         }
         echo $str=json_encode($jarr, JSON_UNESCAPED_UNICODE);//将数组进行json编码
         break;
-        case 'delete':
+    case 'delete':
+        $userid = $_GET['userid'];
+        $sql = "delete FROM test.employ where userid= $userid";
+        $result = mysqli_query($con,$sql);  
+        if (!$result) {
+            printf("Error: %s\n", mysqli_error($con));
+            exit();
+        }
+        echo 1;//将数组进行json编码
+        break;
+    case 'update':
         # code...
         break;
-        case 'update':
-        # code...
-        break;
-        case 'add':
+    case 'add':
         # code...
         break;
 }
