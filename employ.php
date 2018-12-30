@@ -40,10 +40,45 @@ switch ($action) {
         echo 1;//将数组进行json编码
         break;
     case 'update':
-        # code...
+        // 1. 获取前端user json数据
+        $user = $_GET['user'];
+        // 2. 将json转成php能识别的数组格式；
+        $userjson = json_decode($user, true);
+        // 3. 将每个数据定义出来 准备sql；
+        $userid = $userjson['userid'];
+        $username =  (string)$userjson['username'];
+        $phone = $userjson['phone'];
+        $age = $userjson['age'];
+        $department_id = $userjson['departmentid'];
+        // 4. 定义sql；
+        $sql = "UPDATE employ SET username='$username', phone=$phone, age=$age, department_id=$department_id WHERE userid = $userid";
+        echo $sql;
+        $result = mysqli_query($con,$sql);  
+        if (!$result) {
+            printf("Error: %s\n", mysqli_error($con));
+            exit();
+        }
+        echo 1;//将数组进行json编码
         break;
     case 'add':
-        # code...
+        $user = $_GET['user'];
+        // 2. 将json转成php能识别的数组格式；
+        $userjson = json_decode($user, true);
+        // 3. 将每个数据定义出来 准备sql；
+        $userid = $userjson['userid'];
+        $username =  (string)$userjson['username'];
+        $phone = $userjson['phone'];
+        $age = $userjson['age'];
+        $department_id = $userjson['departmentid'];
+        // 4. 定义sql；
+        $sql = "insert into employ (userid, username,phone,age,department_id) values ($userid,'$username',$phone,$age,$department_id)";
+        echo $sql;
+        $result = mysqli_query($con,$sql);  
+        if (!$result) {
+            printf("Error: %s\n", mysqli_error($con));
+            exit();
+        }
+        echo 1;//将数组进行json编码
         break;
 }
 if($con){
